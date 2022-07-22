@@ -1,48 +1,68 @@
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        String API_KEY = System.getenv("API_KEY");
-        String URL = "https://imdb-api.com/en/API/Top250Movies/" + API_KEY;
-        String MOCK = "https://mocki.io/v1/9a7c1ca9-29b4-4eb3-8306-1adb9d159060";
-        String bold = "\u001b[1m";
-        String notBold = "\u001b[0m";
-        String colored = "\u001b[30m\u001b[45m";
-        String title;
-        String[] urlPoster;
-        String urlPosterComplete;
-        String rating;
 
-        // Get top 250 movies
-        URI myURI = URI.create(MOCK);
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder(myURI).GET().build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        String body = response.body();
+        while (true) {
+            Scanner input = new Scanner(System.in);
+            int menuOption = 1;
+            Map<Integer, String> menu = new HashMap<>();
+            menu.put(0, "Exit");
 
-        // Parse data from String to List of Map objects
-        JsonParser parser = new JsonParser();
-        List<Map<String, String>> dataList = parser.parse(body);
+            // Get user input
+            System.out.println("Choose an API");
+            System.out.println(" Insert a number and press enter");
 
-        // Show info: title, image, rank and create sticker
-        StickerGenerator sticker = new StickerGenerator();
+            for (APIEnum api: APIEnum.values()) {
+                System.out.println(" " + menuOption + ". " + api);
+                menu.put(menuOption, api.name());
+                menuOption += 1;
+            }
+            System.out.println(" 0. Exit");
+            System.out.print("> ");
+            Integer menuNumberSelected = input.nextInt();
 
-        for (Map<String, String> film : dataList) {
-            rating = film.get("imDbRating");
-            title = film.get("fullTitle");
-            urlPosterComplete = film.get("image");
-            urlPoster = urlPosterComplete.split("@");
+            if(menuNumberSelected.equals(0)) {
+                System.out.println("Bye!");
+                break;
+            } else {
+                System.out.print("Choose images quantity: ");
+                int imageQty = input.nextInt();
 
-            try {
-                sticker.create(urlPoster[0] + "@", title);
-            } catch (Exception e) {
-                continue;
+                // Get data
+                String apiName = menu.get(menuNumberSelected);
+                String apiUrl = APIEnum.valueOf(apiName).getApiUrl();
+                String data = new MyHttpClient().getData(apiUrl);
+
+                if (apiName.equals("MARVEL")) {
+                    data = "{[" + data.split("\\[")[1];
+                    System.out.println("Implementation in progress");
+                    break;
+                }
+
+                // Parse data from String to List of Map objects
+                JsonParser parser = new JsonParser();
+                List<Map<String, String>> dataList = parser.parse(data);
+
+                // Extract title and url image depending on API selected
+                List<Content> contentList = new GetContentImpl().extract(apiName, dataList);
+
+                // Create sticker
+                StickerGenerator sticker = new StickerGenerator();
+
+                // Create stickers
+                System.out.println("Sticker(s) name:");
+                for (int i = 0; i < imageQty; i++) {
+                    Content dataItem = contentList.get(i);
+
+                    try {
+                        sticker.create(dataItem.getUrlImage(), dataItem.getTitle());
+                        System.out.println(" - " + dataItem.getTitle());
+                    } catch (Exception e) {
+                        continue;
+                    }
+                }
+                System.out.println("\nSticker(s) done!\n");
             }
         }
     }
