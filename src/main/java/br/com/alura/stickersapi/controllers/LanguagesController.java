@@ -31,9 +31,22 @@ public class LanguagesController {
     public LanguageModel updateLanguage(@PathVariable("id") String id, @RequestBody LanguageModel request) {
         return repository.findById(id)
                 .map(obj -> {
-                    obj.setTitle(request.getTitle());
-                    obj.setImage(request.getImage());
-                    obj.setRanking(request.getRanking());
+                    String title = request.getTitle();
+                    String image = request.getImage();
+                    String ranking = request.getRanking();
+
+                    if (title == null) {
+                        title = obj.getTitle();
+                    }
+                    if (image == null) {
+                        image = obj.getImage();
+                    }
+                    if (ranking == null) {
+                        ranking = obj.getRanking();
+                    }
+                    obj.setTitle(title);
+                    obj.setImage(image);
+                    obj.setRanking(ranking);
                     return repository.save(obj);
                 })
                 .orElseGet(() -> {
