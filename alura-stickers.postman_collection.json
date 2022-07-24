@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "72a9ba36-d6b4-4273-977e-04720b18cce1",
+		"name": "alura-stickers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10616243"
+	},
+	"item": [
+		{
+			"name": "get all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_base}}/languages",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"languages"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get all",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/languages",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"languages"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 23 Jul 2022 18:42:03 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"62dc40ee8fb9722158f52ffc\",\n        \"title\": \"java\",\n        \"image\": \"https://raw.githubusercontent.com/abrahamcalf/programming-languages-logos/master/src/java/java_256x256.png\",\n        \"ranking\": \"1\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "delete by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url_base}}/languages/62dc40328fb9722158f52ffb",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"languages",
+						"62dc40328fb9722158f52ffb"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete by id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url_base}}/languages/62dc40328fb9722158f52ffb",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"languages",
+								"62dc40328fb9722158f52ffb"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "20"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 23 Jul 2022 18:53:48 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Successfully deleted"
+				}
+			]
+		},
+		{
+			"name": "update by id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Java\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_base}}/languages/62dc40ee8fb9722158f52ffc",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"languages",
+						"62dc40ee8fb9722158f52ffc"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "update by id",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Java\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/languages/62dc40ee8fb9722158f52ffc",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"languages",
+								"62dc40ee8fb9722158f52ffc"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 23 Jul 2022 19:26:07 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"62dc40ee8fb9722158f52ffc\",\n    \"title\": \"Java\",\n    \"image\": null,\n    \"ranking\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"java\",\n    \"image\": \"https://raw.githubusercontent.com/abrahamcalf/programming-languages-logos/master/src/java/java_256x256.png\",\n    \"ranking\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_base}}/languages",
+					"host": [
+						"{{url_base}}"
+					],
+					"path": [
+						"languages"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"java\",\n    \"image\": \"https://raw.githubusercontent.com/abrahamcalf/programming-languages-logos/master/src/java/java_256x256.png\",\n    \"ranking\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_base}}/languages",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"languages"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 23 Jul 2022 18:41:50 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"62dc40ee8fb9722158f52ffc\",\n    \"title\": \"java\",\n    \"image\": \"https://raw.githubusercontent.com/abrahamcalf/programming-languages-logos/master/src/java/java_256x256.png\",\n    \"ranking\": \"1\"\n}"
+				}
+			]
+		}
+	]
+}
