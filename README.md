@@ -20,3 +20,10 @@
 
 - Endpoint: `/languages`
 - Available HTTP Methods: get, post, patch, delete
+
+[Aula 5](https://github.com/martinezga/alura-stickers-api/tree/aula5). Publicando nossa API no Cloud.
+
+- Heroku deploy -> https://alura-imersaojava.herokuapp.com/
+- Swagger UI documentation -> https://alura-imersaojava.herokuapp.com/swagger-ui.html
+
+![Swagger](https://user-images.githubusercontent.com/52822208/180635238-1b47a0f3-9f6f-48ee-a680-eaf01598affc.png)
